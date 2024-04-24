@@ -1,8 +1,9 @@
 "use client";
 import { Search } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
+import { Suspense } from "react";
 
-export default function SearchForm() {
+function SearchBar() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const query = searchParams.get("q");
@@ -30,5 +31,14 @@ export default function SearchForm() {
         className="bg-transparent text-zinc-50 outline-none placeholder:text-zinc-500 flex-1"
       />
     </form>
+  );
+}
+
+export default function SearchForm() {
+  return (
+    // You could have a loading skeleton as the `fallback` too
+    <Suspense>
+      <SearchBar />
+    </Suspense>
   );
 }
